@@ -9,8 +9,8 @@
 </head>
 <body>
 
-	<c:out value="${spiltter.firstName }"></c:out>
-	<c:out value="${spiltter.lastName }"></c:out>
-	<c:out value="${spiltter.username }"></c:out>
+	<c:out value="${spitter.firstName }"></c:out>
+	<c:out value="${spitter.lastName }"></c:out>
+	<c:out value="${spitter.username }"></c:out>
 </body>
 </html>

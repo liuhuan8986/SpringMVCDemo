@@ -10,6 +10,6 @@
 
 	<p>Welcome to Spittr</p>
 	<a href="#">Splittles</a>
-	<a href="./spiltter/register">Register</a>
+	<a href="./spitter/register">Register</a>
 </body>
 </html>
