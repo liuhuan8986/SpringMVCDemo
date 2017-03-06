@@ -8,7 +8,6 @@
 <title>Spittr</title>
 </head>
 <body>
-
 	<%-- <h1><s:message code="spitter.welcome"/></h1> --%>
 	<h1>welcome</h1>
 	<s:url value="/spitter/register" var="test" >

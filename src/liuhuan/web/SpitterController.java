@@ -3,6 +3,7 @@ package liuhuan.web;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,8 @@ public class SpitterController {
 	}
 	
 	@RequestMapping(value = "/register",method=RequestMethod.POST)
-	public String processRegister(@ModelAttribute @Valid Spitter spitter,BindingResult errors,Model model) throws UnsupportedEncodingException{
-		
+	public String processRegister(@ModelAttribute @Valid Spitter spitter,BindingResult errors,Model model,HttpServletRequest request) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("UTF-8");
 		if(errors.hasErrors()){
 			model.addAttribute("spitter", spitter);
 			System.out.println("hasErrors...");

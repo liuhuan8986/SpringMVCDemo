@@ -20,7 +20,7 @@ public class SpitterRepositoryImp implements SpitterRepository{
 		spitter.setFirstName("liu");
 		spitter.setLastName("huan");
 		spitter.setPassword("123456");
-		spitter.setUsername("liuhuan");
+		spitter.setUsername("liuhuan中文");
 		return spitter;
 	}
 }
