@@ -1,3 +1,5 @@
+    <%@ page language="java" contentType="text/html; charset=gbk"
+    pageEncoding="GBK"%>
     <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
     <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
     <%@ page session="false" %>

@@ -21,8 +21,8 @@
 		<s:param name="min" value="20"/>
 		<s:param name="username">ËÀÉñ</s:param>
 	</s:url>
-	<h1>${test }</h1>
-	<h1>${test2 }</h1>
+<%-- 	<h1>${test }</h1>
+	<h1>${test2 }</h1> --%>
 	<a href="#">Splittles</a>
 	<!-- <a href="./spitter/register">Register</a> -->
 	<a href='<s:url value="/spitter/register"></s:url>'>Register</a>
