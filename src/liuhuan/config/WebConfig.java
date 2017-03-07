@@ -94,7 +94,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public MultipartResolver multipartResolver() throws IOException{
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		//这个地址  会在 workspace 上级目录下 建立： 意思就是这个目录会和workspace同一级别
+		//这个地址  会在 workspace 上级目录下 自动建立： 意思就是这个目录会和workspace同一级别
 		//比如 我的workspace是D:\\javaEEDevSpace
 		//那这tmp的目录就是：D:\\tmp\\spittr\\uploads
 		multipartResolver.setUploadTempDir(new FileSystemResource("/tmp/spittr/uploads"));
@@ -108,9 +108,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public MultipartResolver multipartResolver() throws IOException{
 		
 		StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
-		//这个地址  会在 workspace 上级目录下 建立： 意思就是这个目录会和workspace同一级别
-		//比如 我的workspace是D:\\javaEEDevSpace
-		//那这tmp的目录就是：D:\\tmp\\spittr\\uploads
 		return multipartResolver;
 	}
 	

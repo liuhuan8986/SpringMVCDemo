@@ -39,26 +39,36 @@ public class SpitterController {
 		model.addAttribute("spitter", spitter);
 		return "register";
 	}
-	
+	/**
+	 * 
+	 * @param profilePictures
+	 * @param spitter
+	 * 注解里面的profilePicture字段与表单里面的input标签name字段一样
+	 */
 	@RequestMapping(value = "/register",method=RequestMethod.POST)
-	public String processRegister(@RequestPart("profilePicture") MultipartFile profilePicture, @ModelAttribute @Valid Spitter spitter,BindingResult errors,Model model) throws IllegalStateException, IOException{
+	public String processRegister(@RequestPart("profilePicture") MultipartFile[] profilePictures, @ModelAttribute @Valid Spitter spitter,BindingResult errors,Model model) throws IllegalStateException, IOException{
 		//request.setCharacterEncoding("GBK");
 		if(errors.hasErrors()){
 			model.addAttribute("spitter", spitter);
 			System.out.println("hasErrors...");
 			return "register";
 		}
-		System.out.println(profilePicture.getContentType());
-		System.out.println(profilePicture.getName());
-		System.out.println(profilePicture.getOriginalFilename());
-		System.out.println(profilePicture.getSize());
+		
 		File dir  = new File("D:\\javaEEDev\\upload");
+		
 		if(!dir.exists()){
 			dir.mkdirs();
 		}
 		
-		File file = new File(dir, profilePicture.getOriginalFilename());
-		profilePicture.transferTo(file);
+		for (MultipartFile multipartFile : profilePictures) {
+			System.out.println(multipartFile.getContentType());
+			System.out.println(multipartFile.getName());
+			System.out.println(multipartFile.getOriginalFilename());
+			System.out.println(multipartFile.getSize());
+			File file = new File(dir, multipartFile.getOriginalFilename());
+			multipartFile.transferTo(file);
+		}
+		
 		System.out.println(spitter.toString());
 		spitterRepository.save(spitter);
 		return "redirect:/spitter/"+URLEncoder.encode(spitter.getUsername(), "UTF-8");
