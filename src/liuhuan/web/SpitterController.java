@@ -2,27 +2,20 @@ package liuhuan.web;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.BindingResultUtils;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.tags.BindErrorsTag;
-
 
 import liuhuan.data.SpitterRepository;
 import liuhuan.model.Spitter;
@@ -59,11 +52,13 @@ public class SpitterController {
 		System.out.println(profilePicture.getName());
 		System.out.println(profilePicture.getOriginalFilename());
 		System.out.println(profilePicture.getSize());
-		File data  = new File("D:\\javaEEDev\\upload",profilePicture.getOriginalFilename());
-		if(!data.exists()){
-			data.mkdirs();
+		File dir  = new File("D:\\javaEEDev\\upload");
+		if(!dir.exists()){
+			dir.mkdirs();
 		}
-		profilePicture.transferTo(data);
+		
+		File file = new File(dir, profilePicture.getOriginalFilename());
+		profilePicture.transferTo(file);
 		System.out.println(spitter.toString());
 		spitterRepository.save(spitter);
 		return "redirect:/spitter/"+URLEncoder.encode(spitter.getUsername(), "UTF-8");

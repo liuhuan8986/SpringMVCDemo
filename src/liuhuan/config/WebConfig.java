@@ -10,6 +10,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -89,15 +90,31 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return configurer;
 	}
 	
-	@Bean
+/*	@Bean
 	public MultipartResolver multipartResolver() throws IOException{
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		//这个地址  会在 workspace 上级目录下 建立： 意思就是这个目录会和workspace同一级别
+		//比如 我的workspace是D:\\javaEEDevSpace
+		//那这tmp的目录就是：D:\\tmp\\spittr\\uploads
 		multipartResolver.setUploadTempDir(new FileSystemResource("/tmp/spittr/uploads"));
 		multipartResolver.setMaxInMemorySize(0);
 		multipartResolver.setMaxUploadSize(30*1024*1024);
 		return multipartResolver;
 	}
+	*/
+	
+	@Bean
+	public MultipartResolver multipartResolver() throws IOException{
+		
+		StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
+		//这个地址  会在 workspace 上级目录下 建立： 意思就是这个目录会和workspace同一级别
+		//比如 我的workspace是D:\\javaEEDevSpace
+		//那这tmp的目录就是：D:\\tmp\\spittr\\uploads
+		return multipartResolver;
+	}
+	
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		// TODO Auto-generated method stub
