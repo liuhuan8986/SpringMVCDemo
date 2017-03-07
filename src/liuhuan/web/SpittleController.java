@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import liuhuan.data.SpittleRepository;
-import liuhuan.exception.SpittleNotFoundExceptio;
+import liuhuan.exception.SpittleNotFoundException;
 import liuhuan.model.Spitter;
 import liuhuan.model.Spittle;
 
@@ -35,7 +35,7 @@ public class SpittleController {
 		return "spittles";
 	}
 	
-/*	@RequestMapping(method = RequestMethod.GET)
+/*	@RequestMapping(method = RequestMethod.GET)	
 	public List<Spittle> spittles(@RequestParam(value = "max",defaultValue="10000")long max,@RequestParam(value = "count",defaultValue = "20") int count){
 		System.out.println("spittles...2222222.....");
 		System.out.println("spittles..max="+max);
@@ -58,8 +58,4 @@ public class SpittleController {
 		return "showSpillte";
 	}
 	
-	@ExceptionHandler(SpittleNotFoundExceptio.class)
-	public String handExcetion(){
-		return "error";
-	}
 }

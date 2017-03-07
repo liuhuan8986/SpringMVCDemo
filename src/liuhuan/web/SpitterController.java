@@ -61,6 +61,9 @@ public class SpitterController {
 		}
 		
 		for (MultipartFile multipartFile : profilePictures) {
+			if(multipartFile.getSize()==0){
+				continue;
+			}
 			System.out.println(multipartFile.getContentType());
 			System.out.println(multipartFile.getName());
 			System.out.println(multipartFile.getOriginalFilename());
