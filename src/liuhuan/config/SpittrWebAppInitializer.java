@@ -1,5 +1,8 @@
 package liuhuan.config;
 
+import javax.servlet.Filter;
+
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 
@@ -22,6 +25,13 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		// TODO Auto-generated method stub
 		System.out.println("33333333333");
 		return new String[]{"/"};
+	}
+
+	@Override
+	protected Filter[] getServletFilters() {
+		// TODO Auto-generated method stub
+		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter("UTF-8", true);
+		return new Filter[]{characterEncodingFilter};
 	}
 
 }

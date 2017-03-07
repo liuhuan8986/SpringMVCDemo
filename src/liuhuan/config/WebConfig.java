@@ -61,6 +61,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		templateResolver.setPrefix("/WEB-INF/templates/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML5");
+		templateResolver.setCharacterEncoding("UTF-8");
 		return templateResolver;
 	}
 	

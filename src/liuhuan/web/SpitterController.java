@@ -1,6 +1,7 @@
 package liuhuan.web;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,8 +43,8 @@ public class SpitterController {
 	}
 	
 	@RequestMapping(value = "/register",method=RequestMethod.POST)
-	public String processRegister(@ModelAttribute @Valid Spitter spitter,BindingResult errors,Model model,HttpServletRequest request) throws UnsupportedEncodingException{
-		request.setCharacterEncoding("UTF-8");
+	public String processRegister(@ModelAttribute @Valid Spitter spitter,BindingResult errors,Model model) throws UnsupportedEncodingException{
+		//request.setCharacterEncoding("GBK");
 		if(errors.hasErrors()){
 			model.addAttribute("spitter", spitter);
 			System.out.println("hasErrors...");
@@ -51,7 +52,8 @@ public class SpitterController {
 		}
 		System.out.println(spitter.toString());
 		spitterRepository.save(spitter);
-		return "redirect:/spitter/"+spitter.getUsername();
+		return "redirect:/spitter/"+URLEncoder.encode(spitter.getUsername(), "UTF-8");
+		//return "redirect:/spitter/"+spitter.getUsername();
 	}
 	@RequestMapping(value = "/{username}",method=RequestMethod.GET)
 	public String showSpitterProfile(@PathVariable("username")String username,Model model){
