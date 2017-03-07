@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import liuhuan.data.SpitterRepository;
 import liuhuan.model.Spitter;
@@ -46,7 +48,7 @@ public class SpitterController {
 	 * 注解里面的profilePicture字段与表单里面的input标签name字段一样
 	 */
 	@RequestMapping(value = "/register",method=RequestMethod.POST)
-	public String processRegister(@RequestPart("profilePicture") MultipartFile[] profilePictures, @ModelAttribute @Valid Spitter spitter,BindingResult errors,Model model) throws IllegalStateException, IOException{
+	public String processRegister(@RequestPart("profilePicture") MultipartFile[] profilePictures, @ModelAttribute @Valid Spitter spitter,BindingResult errors,RedirectAttributes model) throws IllegalStateException, IOException{
 		//request.setCharacterEncoding("GBK");
 		if(errors.hasErrors()){
 			model.addAttribute("spitter", spitter);
@@ -74,12 +76,20 @@ public class SpitterController {
 		
 		System.out.println(spitter.toString());
 		spitterRepository.save(spitter);
-		return "redirect:/spitter/"+URLEncoder.encode(spitter.getUsername(), "UTF-8");
-		//return "redirect:/spitter/"+spitter.getUsername();
+		model.addAttribute("username",spitter.getUsername());
+		model.addFlashAttribute("spitter", spitter);
+		
+		return "redirect:/spitter/{username}";
+		//return "redirect:/spitter/"+URLEncoder.encode(spitter.getUsername(), "UTF-8");
 	}
 	@RequestMapping(value = "/{username}",method=RequestMethod.GET)
 	public String showSpitterProfile(@PathVariable("username")String username,Model model){
-		model.addAttribute("spitter",spitterRepository.findSpitterByUserName(username));
+		System.out.println("showSpitterProfile:username="+username);
+		if(!model.containsAttribute("spitter")){
+			model.addAttribute("spitter",spitterRepository.findSpitterByUserName(username));
+		}
+		Spitter spitter = (Spitter) model.asMap().get("spitter");
+		System.out.println(spitter.toString());
 		return "profile";
 	}
 	

@@ -15,12 +15,12 @@ public class SpitterRepositoryImp implements SpitterRepository{
 	@Override
 	public Spitter findSpitterByUserName(String username) {
 		// TODO Auto-generated method stub
-		System.out.println("findSpitterByUserName...");
+		System.out.println("findSpitterByUserName...:"+username);
 		Spitter spitter = new Spitter();
 		spitter.setFirstName("liu");
 		spitter.setLastName("huan");
 		spitter.setPassword("123456");
-		spitter.setUsername("liuhuan中文");
+		spitter.setUsername(username);
 		return spitter;
 	}
 }
