@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import liuhuan.data.SpittleRepository;
+import liuhuan.exception.SpittleNotFoundExceptio;
 import liuhuan.model.Spitter;
 import liuhuan.model.Spittle;
 @Component
@@ -28,9 +29,15 @@ public class SpittleRepositoryImp implements SpittleRepository {
 	}
 
 	@Override
-	public Spittle findOne(long spittleId) {
+	public Spittle findOne(long spittleId) throws SpittleNotFoundExceptio {
 		// TODO Auto-generated method stub
-		Spittle spittle = new Spittle(spittleId,"这是一段文字，不管你信不信，反正我是信了",new Date(),0.456,5.78);
+		Spittle spittle =null;
+		if(spittleId < 10){
+			 spittle = new Spittle(spittleId,"spittleId小于10的整数都正常",new Date(),0.456,5.78);
+		}else{
+			throw new SpittleNotFoundExceptio();
+		}
+	
 		return spittle;
 	}
 

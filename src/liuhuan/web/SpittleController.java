@@ -7,12 +7,14 @@ import javax.xml.ws.Service.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import liuhuan.data.SpittleRepository;
+import liuhuan.exception.SpittleNotFoundExceptio;
 import liuhuan.model.Spitter;
 import liuhuan.model.Spittle;
 
@@ -54,5 +56,10 @@ public class SpittleController {
 	public String spittlesByPath(@PathVariable("spittleId") long id,Model model){
 		model.addAttribute("spiltle",spittleRepository.findOne(id));
 		return "showSpillte";
+	}
+	
+	@ExceptionHandler(SpittleNotFoundExceptio.class)
+	public String handExcetion(){
+		return "error";
 	}
 }

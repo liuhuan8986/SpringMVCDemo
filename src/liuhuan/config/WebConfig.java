@@ -99,7 +99,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		//那这tmp的目录就是：D:\\tmp\\spittr\\uploads
 		multipartResolver.setUploadTempDir(new FileSystemResource("/tmp/spittr/uploads"));
 		multipartResolver.setMaxInMemorySize(0);
-		multipartResolver.setMaxUploadSize(30*1024*1024);
+		multipartResolver.setMaxUploadSize(4*1024*1024);
 		return multipartResolver;
 	}
 	*/
