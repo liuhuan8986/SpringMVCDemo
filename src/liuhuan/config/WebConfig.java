@@ -1,10 +1,15 @@
 package liuhuan.config;
 
+import java.io.IOException;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -84,6 +89,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return configurer;
 	}
 	
+	@Bean
+	public MultipartResolver multipartResolver() throws IOException{
+		
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setUploadTempDir(new FileSystemResource("/tmp/spittr/uploads"));
+		multipartResolver.setMaxInMemorySize(0);
+		multipartResolver.setMaxUploadSize(30*1024*1024);
+		return multipartResolver;
+	}
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		// TODO Auto-generated method stub

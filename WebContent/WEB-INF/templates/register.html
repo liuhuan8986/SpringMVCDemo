@@ -5,11 +5,12 @@
 <title>注册</title>
 </head>
 <body>
-	<form method="post" th:object="${spitter}">
+	<form method="post" th:object="${spitter}" enctype="multipart/form-data">
 		First Name:<input th:field="*{firstName}" type="text"/><br/>
 		Last Name:<input th:field="*{lastName}" type="text"/><br/>
 		UserName :<input th:field="*{username}" type="text"/><br/>
 		Password :<input th:field="*{password}" type="password"/><br/>
+		File :<input name="profilePicture" type="file" accept="image/jpeg,image/png,image/gif"/><br/>
 		<input type="submit" value="register"/>
 	</sf:form>
 </body>
